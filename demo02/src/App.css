@@ -1,0 +1,17 @@
+ul {
+    padding: 0px;    
+}
+
+li {
+    border: solid 1px #ccc;
+    padding: 15px;
+    list-style-type: none;
+    margin-bottom: 3px;    
+    width: 400px;
+}
+
+input {
+    border: solid 1px #ccc;
+    padding: 15px;
+    width: 400px;
+}
