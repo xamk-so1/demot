@@ -32,7 +32,7 @@ function App() {
   return (
     <Container maxWidth="sm">
       
-      <Typography variant="h5">Demo 4: Material UI -komponentit</Typography>
+      <Typography variant="h5">Demo 4: Material-UI-komponentit</Typography>
 
       <Typography style={{
                             fontSize : "16pt",
