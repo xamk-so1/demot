@@ -1,10 +1,11 @@
 import { useRef } from 'react';
-import { Button, Typography } from '@material-ui/core';
+import { Button, TextField, Typography } from '@material-ui/core';
 import Otsikko from './Otsikko';
 import { Link, useHistory, useParams } from 'react-router-dom';
 
 function PoistaTehtava(props) {
 
+    const tekstikentta = useRef();
     const history = useHistory();
     const { indeksi } = useParams();
 
