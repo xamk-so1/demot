@@ -15,7 +15,7 @@ function App() {
 
     try {
 
-      const yhteys = await fetch("https://api.exchangeratesapi.io/latest");
+      const yhteys = await fetch("https://xamkbit.azurewebsites.net/valuutat");
       const tiedot = await yhteys.json();
   
       setData({
