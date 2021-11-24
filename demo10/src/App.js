@@ -2,7 +2,6 @@ import { Backdrop, CircularProgress, Container, Typography } from '@material-ui/
 import Laskuri from './components/Laskuri';
 import { useEffect, useState } from 'react';
 
-
 function App() {
 
   const [data, setData] = useState({
