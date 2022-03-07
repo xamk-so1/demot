@@ -8,7 +8,7 @@ import { fi } from 'date-fns/locale';
 
 function UusiTehtava(props) {
 
-    const [pvmaika, setPvmaika] = useState();
+    const [pvmaika, setPvmaika] = useState(new Date());
     const tekstikentta = useRef();
     const history = useHistory();
 
