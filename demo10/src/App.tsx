@@ -4,53 +4,42 @@ import Laskuri from './components/Laskuri';
 
 const App : React.FC = () : React.ReactElement => {
 
-  const tiedotHaettu : React.MutableRefObject<boolean> = useRef(false);
+  const pyyntoLahetetty : React.MutableRefObject<boolean> = useRef(false);
 
   const [data, setData] = useState<Data>({
-    valuuttakurssit : {},
-    virhe : "",
-    valmis : false
-  });
+                                    valuuttakurssit : {},
+                                    virhe : "",
+                                    valmis : false
+                                  });
 
-  const haeTiedot = async () : Promise<any> => {
+  const haeData = async () : Promise<void> => {
 
-    if (!tiedotHaettu.current) {
+    try {
 
-      try {
+      const yhteys : Response = await fetch("https://xamkbit.azurewebsites.net/valuutat");
+      const data : any = await yhteys.json();
+  
+      setData({...data, valuuttakurssit : data.rates, valmis : true});
 
-        const yhteys = await fetch("https://xamkbit.azurewebsites.net/valuutat");
-        const tiedot = await yhteys.json();
+    } catch (e: any) {
 
-        setData({
-          ...data, 
-          valuuttakurssit : tiedot.rates,
-          valmis : true
-        });
+      setData({...data, virhe : "Palvelimelle ei saada yhteyttä.", valmis : true});
 
-      } catch (error) {
-
-        setData({
-          ...data, 
-          valuuttakurssit : {},
-          valmis : true,
-          virhe : `VIRHE: yhteyttä palvelimelle ei voitu muodostaa. (${error})`
-        });
-
-      }
-
-    }
-
-    return () => {
-      tiedotHaettu.current = true;
     }
 
   }
 
   useEffect(() => {
+    
+    if (!pyyntoLahetetty.current) {
+      haeData();
+    }
 
-    haeTiedot();
+    return () => {
+      pyyntoLahetetty.current = true;
+    }
 
-  }, [])
+  }, []);
 
   return (
 
@@ -58,14 +47,15 @@ const App : React.FC = () : React.ReactElement => {
 
       <Typography variant="h5">Demo 10: Ulkoisen datan käyttö</Typography>
 
-      {(data.virhe)
-        ? <Typography color="error">{data.virhe}</Typography>
-        : (data.valmis) 
-          ? <Laskuri valuutat={data.valuuttakurssit} />
-          : <Backdrop open={true}>
-              <CircularProgress color="inherit" />
-            </Backdrop>
+      {Boolean(data.virhe) 
+      ? <Typography sx={{marginTop : 2, color : "#F00"}}>{data.virhe}</Typography>
+      : (!data.valmis) 
+      ? <Backdrop open={true}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      : <Laskuri valuuttakurssit={data.valuuttakurssit}/>
       }
+      
 
     </Container>
 

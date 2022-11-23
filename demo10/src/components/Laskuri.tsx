@@ -2,8 +2,9 @@ import React, { useRef, useState } from 'react';
 import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, TextField, Typography } from '@mui/material';
 
 interface Props {
-    valuutat : Valuutat
+  valuuttakurssit : Valuutat  
 }
+
 
 const Laskuri : React.FC<Props> = (props : Props) : React.ReactElement => {
 
@@ -16,9 +17,9 @@ const Laskuri : React.FC<Props> = (props : Props) : React.ReactElement => {
 
     if (Number(muunnettavaSummaRef.current!.value)) {
 
-        let tulos : number = Number(muunnettavaSummaRef.current!.value) * props.valuutat[kohdevaluutta];
+        let tulos : number = Number(muunnettavaSummaRef.current!.value) * Number(props.valuuttakurssit[kohdevaluutta]);
 
-        setTulosteksti(`${muunnettavaSummaRef.current!.value} EUR = ${tulos.toFixed(2)} ${kohdevaluutta}`);
+        setTulosteksti(`${muunnettavaSummaRef.current!.value} EUR = ${String(tulos.toFixed(2))} ${kohdevaluutta}`);
 
     } else {
         setTulosteksti(`Syötä ainoastaan numeroita, kiitos.`);
@@ -55,9 +56,11 @@ const Laskuri : React.FC<Props> = (props : Props) : React.ReactElement => {
             displayEmpty
             onChange={(e : SelectChangeEvent) => { setKohdevaluutta(e.target.value) }}
           >
-            {Object.keys(props.valuutat).sort().map((valuutta) => {
-              return <MenuItem key={valuutta} value={valuutta}>{valuutta} ({props.valuutat[valuutta]})</MenuItem>          
-            })}          
+            {Object.keys(props.valuuttakurssit).sort().map((valuutta : string, idx : number) => {
+              return <MenuItem key={idx} value={valuutta}>{valuutta}</MenuItem>
+            })}
+   
+        
           </Select>
         </FormControl>
 
