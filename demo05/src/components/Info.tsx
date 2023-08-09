@@ -8,7 +8,7 @@ const Info : React.FC = () : React.ReactElement => {
 
   const vahvistaPaluu = () : void => {
 
-    if (window.confirm("Haluatko varmasti palata aloitukseen")) {
+    if (window.confirm("Haluatko varmasti palata aloitukseen?")) {
 
       navigate("/");
 
