@@ -1,6 +1,6 @@
 import { Button, Checkbox, Container, TextField, Typography, FormControlLabel, FormControl, FormHelperText, FormLabel, Radio, RadioGroup } from '@mui/material';
 import { SystemStyleObject } from '@mui/system';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 const tekstikenttaTyyli : SystemStyleObject = {
   marginTop : "10px",
