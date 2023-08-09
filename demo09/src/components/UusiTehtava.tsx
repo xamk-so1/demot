@@ -51,7 +51,7 @@ const UusiTehtava : React.FC<Props> = ({ tehtavat, setTehtavat }) : React.ReactE
             label="Suoritettava viimeistään"
             value={pvmAika}
             onChange={(uusiPvm : Date | null) => setPvmAika(uusiPvm!)}
-            renderInput={(params : any) => <TextField {...params} 
+            slots={(params : any) => <TextField {...params} 
                                             fullWidth={true}
                                             sx={{marginBottom : "10px"}}
                                             />}
